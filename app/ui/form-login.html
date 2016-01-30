@@ -1,0 +1,24 @@
+<form class="uk-panel uk-panel-box uk-form" method="post" action="login">
+	<div class="uk-form-row">
+		<p>{{ @dict.msg.login }}</p>
+	</div>
+	<check if="{{ @GET.login_error == 'activated' }}">
+		<div class="uk-form-row">
+			<div class="uk-alert uk-alert-warning uk-text-danger" data-uk-alert>
+				<a href="" class="uk-alert-close uk-close"></a>
+				<p>Login salah.</p>
+			</div>
+		</div>
+	</check>
+	<div class="uk-form-row">
+		<input name="username" class="uk-form-large uk-width-1-1" type="text" placeholder="{{ @dict.placeholder.username }}">
+	</div>
+	<div class="uk-form-row">
+		<input name="password" class="uk-form-large uk-width-1-1" type="password" placeholder="{{ @dict.placeholder.password }}">
+	</div>
+	<div class="uk-form-row">
+		<button name="login" class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit">
+			{{ @dict.word.login }}
+		</button>
+	</div>
+</form>

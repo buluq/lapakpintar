@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="{{ strtolower(@LANGUAGE) }}">
+	<head>
+		<meta charset="{{ strtolower(@ENCODING) }}">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>{{ @metadata.page.title }}</title>
+		<repeat group="{{ @metadata.page }}" key="{{ @name }}" value="{{ @content }}">
+			<meta name="{{ @name }}" content="{{ @content }}">
+		</repeat>
+		<link href="placeholder-favicon.png" rel="icon">
+		<link href="css/uikit.almost-flat.min.css" rel="stylesheet">
+		<link href="css/sticky.almost-flat.min.css" rel="stylesheet">
+		<link href="css/search.almost-flat.min.css" rel="stylesheet">
+		<link href="css/tooltip.almost-flat.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<!--[if lt IE 8]>
+			{{ Markdown::instance()->convert(@dict.msg.oldbrowser) }}
+		<![endif]-->
+		<nav class="uk-navbar uk-navbar-attached" data-uk-sticky>
+			<div class="uk-container uk-container-center">
+				<a href="#menu-offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+				<ul class="uk-navbar-nav uk-hidden-small">
+					<li class="uk-parent" data-uk-dropdown>
+						<a href="" title="{{ @dict.navbar.account }}" data-uk-tooltip="{pos:'right'}">
+							<i class="uk-icon-user"></i>
+						</a>
+						<div class="uk-dropdown uk-dropdown-navbar">
+							<ul class="uk-nav uk-nav-navbar">
+								<check if="{{ @SESSION.user == 'active' }}">
+									<true>
+										<li>
+											<a href="logout">
+												<i class="uk-icon-key"></i> {{ @dict.word.logout }}
+											</a>
+										</li>
+									</true>
+									<false>
+										<li>
+											<a href="login">
+												<i class="uk-icon-key"></i> {{ @dict.word.login }}
+											</a>
+										</li>
+									</true>
+								</check>
+							</ul>
+						</div>
+					</li>
+					<li><a href="" title="{{ @dict.navbar.category }}" data-uk-tooltip><i class="uk-icon-folder"></i></a></li>
+				</ul>
+				<div class="uk-navbar-content uk-hidden-small">
+					<form class="uk-search">
+						<input type="search" class="uk-search-field" placeholder="{{ @dict.placeholder.search }}">
+					</form>
+				</div>
+				<div class="uk-navbar-flip">
+					<a href="/" class="uk-navbar-brand" title="{{ @SITE.DESCRIPTION }}" data-uk-tooltip="{pos:'bottom-right'}">{{ @SITE.NAME }}</a>
+				</div>
+			</div>
+		</nav>
+		<check if="{{ @DEBUG == 1 }}">
+			<include href="maintenance.html" />
+		</check>
+		<include href="{{ @layout }}" />
+		{* <check if="{{ @DEBUG == 1 }}">
+			<include href="debug.html" />
+		</check> *}
+		<footer class="uk-margin-large-top">
+			<hr class="uk-grid-divider">
+			<div class="uk-container uk-container-center">
+				<div class="uk-grid uk-text-small">
+					<div class="uk-width-1-1 uk-width-medium-1-2">
+						<p class="uk-text-left uk-text-center-small">{{ @dict.msg.copyright . ' ' . @SITE.COPYRIGHT . ' ' . @dict.word.by . ' <a href="' . @SITE.AUTHOR.URL . '" target="_blank" title="' . @SITE.AUTHOR.WEB . '">' . @SITE.AUTHOR.NAME . '</a>' }}</p>
+					</div>
+					<div class="uk-width-medium-1-2 uk-hidden-small uk-clearfix">
+						<ul class="uk-subnav uk-subnav-line uk-align-right">
+							<li><a href="">{{ @dict.footnav.aboutus }}</a></li>
+							<li><a href="">{{ @dict.footnav.contactus }}</a></li>
+							<li><a href="">{{ @dict.footnav.terms }}</a></li>
+							<li><a href="">{{ @dict.footnav.privacy }}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<div id="menu-offcanvas" class="uk-offcanvas">
+			<div class="uk-offcanvas-bar">
+				<ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+					<li><a href="">{{ @dict.navbar.account }}</a></li>
+					<li><a href="">{{ @dict.navbar.category }}</a></li>
+				</ul>
+			</div>
+		</div>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/uikit.min.js"></script>
+		<script src="js/sticky.min.js"></script>
+		<script src="js/search.min.js"></script>
+		<script src="js/tooltip.min.js"></script>
+		{{ @ANALYTICS.CODE | raw }}
+	</body>
+</html>

@@ -1,0 +1,15 @@
+# Mengabaikan kerangka kerja
+app/lib/
+
+# Mengabaikan lingkungan pengembangan
+.kateproject
+
+# Mengabaikan berkas temporer
+*~
+*.bak
+*.old
+*.swp
+app/tmp/*.php
+
+# Mengabaikan basis data
+*.db

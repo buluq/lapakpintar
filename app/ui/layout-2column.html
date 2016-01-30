@@ -1,0 +1,14 @@
+<div class="uk-container uk-container-center">
+	<div class="uk-grid">
+		<main class="uk-width-3-4">
+			<check if="{{ @page !== '' }}">
+				<include href="{{ @page }}" />
+			</check>
+		</main>
+		<aside class="uk-width-1-4">
+			<check if="{{ @SESSION.user != 'active' }}">
+				<include href="form-login.html" />
+			</check>
+		</aside>
+	</div>
+</div>
